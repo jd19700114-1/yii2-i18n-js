@@ -39,14 +39,14 @@ class I18nJs extends BaseObject
     private $filenames = [];
 
     /**
-     * @var array
+     * @var integer
      */
-    private $savedModificationTime = [];
+    private $savedModificationTime;
 
     /**
-     * @var array
+     * @var integer
      */
-    private $currentModificationTime = [];
+    private $currentModificationTime;
 
     /**
      * @inheritdoc
@@ -74,7 +74,10 @@ class I18nJs extends BaseObject
             $this->saveJsFile();
             $this->saveModificationTime();
         }
-        $this->registerJsFile();
+        Yii::$app->view->registerJsFile(
+            '/' . $this->jsFilename . '?v=' . $this->currentModificationTime
+        );
+        $this->registerJsScript();
     }
 
     private function getBasePaths()
@@ -147,7 +150,7 @@ class I18nJs extends BaseObject
         return
             file_put_contents(
                 $this->jsFilenameOnServer,
-                'var YII_I18N_JS = ' . Json::encode($result) . ';'
+                'var YII_I18N_JS = ' . Json::encode($result) . ';' . "\n"
             );
     }
 
@@ -155,16 +158,12 @@ class I18nJs extends BaseObject
     {
         file_put_contents(
             $this->filenameForSavingModificationTime,
-            $this->currentModificationTime
+            $this->currentModificationTime . "\n"
         );
     }
 
-    private function registerJsFile()
+    private function registerJsScript()
     {
-        $view = Yii::$app->view;
-        $view->registerJsFile(
-            '/' . $this->jsFilename . '?v=' . $this->currentModificationTime
-        );
         $sourceLanguage = strtolower(Yii::$app->sourceLanguage);
         $js = <<<JS
 (function () {

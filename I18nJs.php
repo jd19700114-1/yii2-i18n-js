@@ -199,6 +199,6 @@ class I18nJs extends BaseObject
   }
 })();
 JS;
-        $view->registerJs($js, View::POS_END);
+        Yii::$app->view->registerJs($js, View::POS_END);
     }
 }

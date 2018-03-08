@@ -168,23 +168,25 @@ class I18nJs extends BaseObject
         $js = <<<JS
 (function () {
   if (!('t' in window.yii)) {
-    var language = document.documentElement.lang;
-    if (!language) {
+    if (!document.documentElement.lang) {
       throw new Error(
         'You must specify the "lang" attribute for the <html> element'
       );
     }
-    yii.t = function (category, message, params) {
+    yii.t = function (category, message, params, language) {
+      language = language || document.documentElement.lang;
+      var translatedMessage;
       if (
-        language === "{$sourceLanguage}" || 
+        language === "{$sourceLanguage}" ||
         !YII_I18N_JS ||
         !YII_I18N_JS[language] ||
         !YII_I18N_JS[language][category] ||
         !YII_I18N_JS[language][category][message]
       ) {
-        return message;
+        translatedMessage = message;
+      } else {
+        translatedMessage = YII_I18N_JS[language][category][message];
       }
-      var translatedMessage = YII_I18N_JS[language][category][message];
       if (params) {
         Object.keys(params).map(function (key) {
           var escapedParam =

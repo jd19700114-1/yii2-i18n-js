@@ -45,5 +45,6 @@ $(function () {
   console.log(yii.t('app', 'Hello, {username}!', {username: 'John'}));
   console.log(yii.t('app', 'Hello, {0}!', ['John']));
   console.log(yii.t('app', 'Hello, {0} {1}!', ['John', 'Doe']));
+  console.log(yii.t('app', 'Hello, {0} {1}!', ['John', 'Doe'], 'en-US'));
 });
 ```

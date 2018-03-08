@@ -9,7 +9,7 @@
   "license": "MIT",
   "require": {
     "yiisoft/yii2": "^2",
-    "w3lifer/php-helper": "^3"
+    "w3lifer/php-helper": "^4"
   },
   "authors": [
     {

@@ -100,7 +100,11 @@ class I18nJs extends BaseObject
         $filenames = [];
         foreach ($this->basePaths as $basePath) {
             foreach (
-                PhpHelper::get_files_in_directory($basePath, true) as $filename
+                PhpHelper::get_files_in_directory(
+                    $basePath,
+                    true,
+                    ['php']
+                ) as $filename
             ) {
                 $filenames[] = $filename;
             }

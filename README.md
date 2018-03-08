@@ -27,27 +27,14 @@ return [
 ];
 ```
 
-2. Initialize the component anywhere, for example in the configuration:
+2. Initialize the component anywhere, for example in `@app/views/layouts/main.php`:
 
 ``` php
-<?php
-
-return [
-    // ...
-    'components' => [
-        // ...
-        'i18nJs' => [
-            'class' => 'w3lifer\yii2\I18nJs',
-        ],
-        // ...
-    ],
-    // ...
-    'on afterRequest' => function () {
-        Yii::$app->i18nJs;
-    },
-    // ...
-];
+Yii::$app->i18nJs;
 ```
+
+Note, you do not need to register the component in the places that will be processed with AJAX-requests (for example, in `@app/config/web.php` -> `bootstrap`, `on afterRequest`, etc), because it will be loaded twice, and it makes no sense.
+
 
 ## Usage
 

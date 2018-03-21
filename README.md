@@ -39,7 +39,7 @@ Note, you do not need to register the component in the places that will be proce
 ## Usage
 
 ``` js
-$(function () {
+window.addEventListener('DOMContentLoaded', function () {
   console.log(yii.t('app', 'Hello'));
   console.log(yii.t('app', 'Hello, World!'));
   console.log(yii.t('app', 'Hello, {username}!', {username: 'John'}));

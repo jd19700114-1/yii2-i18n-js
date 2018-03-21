@@ -167,6 +167,9 @@ class I18nJs extends BaseObject
         $sourceLanguage = strtolower(Yii::$app->sourceLanguage);
         $js = <<<JS
 (function () {
+  if (!('yii' in window)) {
+    window.yii = {};
+  }
   if (!('t' in window.yii)) {
     if (!document.documentElement.lang) {
       throw new Error(
